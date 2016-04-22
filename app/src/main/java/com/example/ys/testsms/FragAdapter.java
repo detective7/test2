@@ -18,7 +18,7 @@ public class FragAdapter extends FragmentPagerAdapter {
     public FragAdapter(FragmentManager fm,List<Fragment> fragments) {
         super(fm);
         // TODO Auto-generated constructor stub
-        mFragments=fragments;
+        this.mFragments = fragments;
     }
 
     @Override
