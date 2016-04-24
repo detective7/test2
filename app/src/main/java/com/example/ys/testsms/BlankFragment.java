@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +25,7 @@ public class BlankFragment extends Fragment {
     private ViewPager vp;
     private TabLayout mTabLayout;//标题页卡
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
-    private ArrayList<Fragment> fragments;
+    private List<Fragment> fragments;
     private View view1, view2, view3, view4, view5;//页卡视图
 
 
@@ -42,41 +42,23 @@ public class BlankFragment extends Fragment {
 
         //获取标题页卡实例
         mTabLayout = (TabLayout) view.findViewById(R.id.tabs);
-        fragments = new ArrayList<Fragment>();
-//        view1 = mInflater.inflate(R.layout.fl1, null);
-//        view2 = mInflater.inflate(R.layout.fragment_blank, null);
-//        view3 = mInflater.inflate(R.layout.fragment_blank, null);
-//        view4 = mInflater.inflate(R.layout.fragment_blank, null);
-//        view5 = mInflater.inflate(R.layout.fragment_blank, null);
-//        //添加页卡视图
-//        fragments.add(view1);
-//        fragments.add(view2);
-//        fragments.add(view3);
-//        fragments.add(view4);
-//        fragments.add(view5);
-        Fragment fm1 = new fl1();
+        fragments = new ArrayList<>();
 
-        fragments.add(fm1);
-        fragments.add(new fl2());
-        fragments.add(new fl3());
         fragments.add(new fl1());
         fragments.add(new fl2());
+        fragments.add(new fl3());
 
-        MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager(), fragments);
+        MyPagerAdapter adapter = new MyPagerAdapter(getChildFragmentManager(), fragments, mTitleList);
 
         //添加页卡标题
         mTitleList.add("No:1");
         mTitleList.add("No:2");
         mTitleList.add("No:3");
-        mTitleList.add("No:4");
-        mTitleList.add("No:5");
 
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(2)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(3)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(4)));
 
         //设定适配器
         vp = (ViewPager) view.findViewById(R.id.viewpager);
@@ -88,12 +70,14 @@ public class BlankFragment extends Fragment {
         return view;
     }
 
-    private class MyPagerAdapter extends FragmentPagerAdapter {
+    private class MyPagerAdapter extends FragmentStatePagerAdapter {
         private List<Fragment> mFragments;
+        private List<String> mTitles;
 
-        public MyPagerAdapter(FragmentManager fm, List<Fragment> mFragments) {
+        public MyPagerAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
             super(fm);
-            this.mFragments = mFragments;
+            this.mFragments = fragments;
+            this.mTitles = titles;
         }
 
         @Override
@@ -109,17 +93,6 @@ public class BlankFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
             return mFragments.get(position);
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(mFragments.get(position).getView());//添加页卡
-            return mFragments.get(position);
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(mFragments.get(position).getView());//删除页卡
         }
 
         @Override
