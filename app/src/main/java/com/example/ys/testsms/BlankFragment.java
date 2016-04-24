@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class BlankFragment extends Fragment {
 
-    private LayoutInflater mInflater;
+//    private LayoutInflater mInflater;
 
     private ViewPager vp;
     private TabLayout mTabLayout;//标题页卡
@@ -38,7 +38,7 @@ public class BlankFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blank, container, false);
-        mInflater = LayoutInflater.from(getActivity());
+//        mInflater = LayoutInflater.from(getActivity());
 
         //获取标题页卡实例
         mTabLayout = (TabLayout) view.findViewById(R.id.tabs);
