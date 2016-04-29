@@ -58,7 +58,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             String filename=data.getStringExtra("filename");
             String filepath=data.getStringExtra("filepath");
             Toast.makeText(MainActivity.this,filename,Toast.LENGTH_SHORT).show();
-            fileFinder.setText(filename);
+            fileFinder.setText(filepath);
         }
     }
 
