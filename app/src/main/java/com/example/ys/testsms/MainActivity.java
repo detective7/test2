@@ -24,17 +24,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     String APPKEY = "11bc365b9eff2";
     String APPSECRETE = "658f26cd66e813667521d0a915d95b56";
 
-    // 手机号输入框
+    //短信部分控件
     private EditText inputPhoneEt;
-
-    // 验证码输入框
     private EditText inputCodeEt;
-
-    // 获取验证码按钮
     private Button requestCodeBtn;
-
-    // 注册按钮
-    private Button commitBtn;
+    private Button commitBtn,fileFinder;
+    private static int REQUESTCODE=11;
+    //
 
     //
     int i = 30;
@@ -43,8 +39,27 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fileFinder = (Button)this.findViewById(R.id.fileFinder);
+        fileFinder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,FileFinderActivity.class);
+                MainActivity.this.startActivityForResult(intent,REQUESTCODE);
+            }
+        });
 
         init();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==MainActivity.REQUESTCODE&&resultCode==RESULT_OK){
+            String filename=data.getStringExtra("filename");
+            String filepath=data.getStringExtra("filepath");
+            Toast.makeText(MainActivity.this,filename,Toast.LENGTH_SHORT).show();
+            fileFinder.setText(filename);
+        }
     }
 
     /**

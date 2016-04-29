@@ -46,11 +46,21 @@
         android:layout_alignRight="@+id/login_request_code_btn"
         android:layout_alignEnd="@+id/login_request_code_btn" />
 
-    <fragment
-        android:name="com.example.ys.testsms.BlankFragment"
-        android:id="@+id/tab_content"
-        android:layout_below="@id/login_commit_btn"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查看本地文件"
+        android:id="@+id/fileFinder"
+        android:layout_below="@+id/login_commit_btn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <!--<fragment-->
+        <!--android:name="com.example.ys.testsms.BlankFragment"-->
+        <!--android:id="@+id/tab_content"-->
+        <!--android:layout_below="@id/login_commit_btn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
 
 </RelativeLayout>    
