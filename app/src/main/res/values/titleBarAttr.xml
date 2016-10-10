@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBarView">
+        <attr name="isLeftBtn" format="integer"/>
+        <attr name="leftBtnBg" format="reference|color"/>
+        <attr name="leftBtnTextSize" format="dimension"/>
+        <attr name="leftBtnTextColor" format="color"/>
+        <attr name="leftBtnText" format="string"/>
+        <attr name="isCenterTitle" format="integer"/>
+        <attr name="centerTitleSize" format="dimension"/>
+        <attr name="centerTitleColor" format="color"/>
+        <attr name="centerTitleText" format="string"/>
+        <attr name="isRightBtn" format="integer"/>
+        <attr name="rightBtnBg" format="reference|color"/>
+        <attr name="rightBtnTextSize" format="dimension"/>
+        <attr name="rightBtnTextColor" format="color"/>
+        <attr name="rightBtnText" format="string"/>
+    </declare-styleable>
+</resources>

@@ -1,14 +1,15 @@
 package com.example.ys.testsms;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -19,7 +20,7 @@ import android.widget.Toast;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     String APPKEY = "11bc365b9eff2";
     String APPSECRETE = "658f26cd66e813667521d0a915d95b56";
@@ -28,17 +29,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private EditText inputPhoneEt;
     private EditText inputCodeEt;
     private Button requestCodeBtn;
-    private Button commitBtn,fileFinder;
+    private Button commitBtn,fileFinder,fragBtn;
     private static int REQUESTCODE=11;
-    //
-
-    //
     int i = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         fileFinder = (Button)this.findViewById(R.id.fileFinder);
         fileFinder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +74,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         commitBtn = (Button) findViewById(R.id.login_commit_btn);
         requestCodeBtn.setOnClickListener(this);
         commitBtn.setOnClickListener(this);
+        fragBtn =(Button)findViewById(R.id.frag_viewp);
+        fragBtn.setOnClickListener(this);
 
         // 启动短信验证sdk
         SMSSDK.initSDK(this, APPKEY, APPSECRETE);
@@ -129,6 +133,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         .getText().toString());
                 //createProgressBar();
                 break;
+
+            case R.id.frag_viewp:
+                startActivity(new Intent(MainActivity.this,Frag_viewpActivity.class));
         }
     }
 

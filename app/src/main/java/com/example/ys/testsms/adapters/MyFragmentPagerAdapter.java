@@ -1,4 +1,4 @@
-package com.example.ys.testsms;
+package com.example.ys.testsms.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
