@@ -11,6 +11,10 @@
         android:layout_height="68dp"
         app:isLeftBtn="2"
         app:leftBtnText="返回"
+        app:isCenterTitle="1"
+        app:centerTitleText="标题"
+        app:isRightBtn="1"
+        app:rightBtnBg="@drawable/more"
         android:background="@color/colorPrimary"
         android:id="@+id/title"/>
 

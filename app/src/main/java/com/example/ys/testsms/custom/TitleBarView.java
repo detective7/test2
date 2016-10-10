@@ -25,7 +25,7 @@ public class TitleBarView extends RelativeLayout {
     private Button leftBtn,rightBtn;
     private TextView title;
     private Drawable leftBtnBg,rightBtnBg;
-    private LayoutParams leftParams,titleParams,RightParams;
+    private LayoutParams leftParams,titleParams,rightParams;
     private int leftBtnTextSize,centerTitleSize,RightBtnTextSize;
     private int leftBtnTextColor,centerTitleColor,RightBtnTextColor;
     private int isLeftBtn,isCenterTitle,isRightBtn;
@@ -43,6 +43,7 @@ public class TitleBarView extends RelativeLayout {
         arr = getContext().obtainStyledAttributes(attrs, R.styleable.TitleBarView);
         isLeftBtn = arr.getInt(R.styleable.TitleBarView_isLeftBtn,0);
         isCenterTitle = arr.getInt(R.styleable.TitleBarView_isCenterTitle,0);
+        isRightBtn = arr.getInt(R.styleable.TitleBarView_isRightBtn,0);
 
         if(isLeftBtn==1){
             leftBtnBg = arr.getDrawable(R.styleable.TitleBarView_leftBtnBg);
@@ -56,7 +57,7 @@ public class TitleBarView extends RelativeLayout {
         }
         if(isLeftBtn==2){
             leftBtnText = arr.getString(R.styleable.TitleBarView_leftBtnText);
-            leftBtnTextSize = arr.getInt(R.styleable.TitleBarView_leftBtnTextSize,16);
+            leftBtnTextSize = arr.getInt(R.styleable.TitleBarView_leftBtnTextSize,14);
             leftBtnTextColor = arr.getColor(R.styleable.TitleBarView_leftBtnTextColor,getResources().getColor(R.color.white));
             leftBtn = new Button(getContext());
             leftBtn.setText(leftBtnText);
@@ -75,7 +76,28 @@ public class TitleBarView extends RelativeLayout {
         }
 
         if(isCenterTitle==1){
+            centerTitleText = arr.getString(R.styleable.TitleBarView_centerTitleText);
+            centerTitleSize = arr.getInt(R.styleable.TitleBarView_centerTitleSize,18);
+            centerTitleColor = arr.getColor(R.styleable.TitleBarView_centerTitleColor,getResources().getColor(R.color.white));
+            title = new TextView(getContext());
+            title.setText(centerTitleText);
+            title.setTextColor(centerTitleColor);
+            title.setTextSize(centerTitleSize);
+            titleParams = new RelativeLayout.LayoutParams(DpSpUtil.sp2px(getContext(),centerTitleSize*centerTitleText.length()), ViewGroup.LayoutParams.WRAP_CONTENT);
+            titleParams.addRule(CENTER_HORIZONTAL);
+            titleParams.setMargins(0,16,0,16);
+            addView(title, titleParams);
+        }
 
+        if(isRightBtn==1){
+            rightBtnBg = arr.getDrawable(R.styleable.TitleBarView_rightBtnBg);
+            rightBtn = new Button(getContext());
+            rightBtn.setBackground(rightBtnBg);
+
+            rightParams = new RelativeLayout.LayoutParams(60, ViewGroup.LayoutParams.MATCH_PARENT);
+            rightParams.addRule(ALIGN_PARENT_RIGHT,TRUE);
+            rightParams.setMargins(0,23,32,23);
+            addView(rightBtn, rightParams);
         }
 
     }
