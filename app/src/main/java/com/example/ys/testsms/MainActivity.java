@@ -17,6 +17,9 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.ys.testsms.custom.TitleBarView;
+import com.example.ys.testsms.interfaces.TitleBarListener;
+
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
@@ -31,6 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Button requestCodeBtn;
     private Button commitBtn,fileFinder,fragBtn;
     private static int REQUESTCODE=11;
+    private TitleBarView titleBar;
     int i = 30;
 
     @Override
@@ -76,6 +80,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
         commitBtn.setOnClickListener(this);
         fragBtn =(Button)findViewById(R.id.frag_viewp);
         fragBtn.setOnClickListener(this);
+        titleBar = (TitleBarView)findViewById(R.id.title);
+        titleBar.setOnTitleBarClickListener(new TitleBarListener() {
+            @Override
+            public void leftClick() {
+                Toast.makeText(MainActivity.this, "左", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void rightClick() {
+                Toast.makeText(MainActivity.this, "右", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // 启动短信验证sdk
         SMSSDK.initSDK(this, APPKEY, APPSECRETE);

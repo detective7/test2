@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.ys.testsms.DpSpUtil;
 import com.example.ys.testsms.R;
+import com.example.ys.testsms.interfaces.TitleBarListener;
 
 /**
  * Describe:
@@ -30,6 +32,7 @@ public class TitleBarView extends RelativeLayout {
     private int isLeftBtn,isCenterTitle,isRightBtn;
     private String leftBtnText,centerTitleText,rightBtnText;
     private Paint mPaint;
+    private TitleBarListener listener;
 
     public TitleBarView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -53,6 +56,12 @@ public class TitleBarView extends RelativeLayout {
             leftParams.addRule(ALIGN_PARENT_LEFT,TRUE);
             leftParams.setMargins(32,23,0,23);
             addView(leftBtn, leftParams);
+            leftBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.leftClick();
+                }
+            });
         }
         if(isLeftBtn==2){
             leftBtnText = arr.getString(R.styleable.TitleBarView_leftBtnText);
@@ -72,6 +81,12 @@ public class TitleBarView extends RelativeLayout {
             leftParams.addRule(ALIGN_PARENT_LEFT,TRUE);
             leftParams.setMargins(32,23,0,23);
             addView(leftBtn, leftParams);
+            leftBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.leftClick();
+                }
+            });
         }
 
         if(isCenterTitle==1){
@@ -97,6 +112,12 @@ public class TitleBarView extends RelativeLayout {
             rightParams.addRule(ALIGN_PARENT_RIGHT,TRUE);
             rightParams.setMargins(0,23,32,23);
             addView(rightBtn, rightParams);
+            rightBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.rightClick();
+                }
+            });
         }else if(isRightBtn==2){
             rightBtnText = arr.getString(R.styleable.TitleBarView_rightBtnText);
             rightBtnTextSize = DpSpUtil.px2sp(getContext(),arr.getDimension(R.styleable.TitleBarView_rightBtnTextSize,42f));
@@ -112,12 +133,18 @@ public class TitleBarView extends RelativeLayout {
             rightParams.addRule(ALIGN_PARENT_RIGHT,TRUE);
             rightParams.setMargins(0,23,32,23);
             addView(rightBtn, rightParams);
+            rightBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.rightClick();
+                }
+            });
         }
 
     }
 
-    public TitleBarView(Context context) {
-        super(context);
+    public void setOnTitleBarClickListener(TitleBarListener listener){
+        this.listener=listener;
     }
 
 }
