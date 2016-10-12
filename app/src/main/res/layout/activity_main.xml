@@ -13,8 +13,10 @@
         app:leftBtnText="返回"
         app:isCenterTitle="1"
         app:centerTitleText="标题"
-        app:isRightBtn="1"
-        app:rightBtnBg="@drawable/more"
+        app:isRightBtn="2"
+        app:rightBtnText="hello"
+        app:rightBtnTextSize="16sp"
+        app:rightBtnTextColor="#3322AA"
         android:background="@color/colorPrimary"
         android:id="@+id/title"/>
 

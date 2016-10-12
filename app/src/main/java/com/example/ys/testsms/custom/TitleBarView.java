@@ -26,10 +26,10 @@ public class TitleBarView extends RelativeLayout {
     private TextView title;
     private Drawable leftBtnBg,rightBtnBg;
     private LayoutParams leftParams,titleParams,rightParams;
-    private int leftBtnTextSize,centerTitleSize,RightBtnTextSize;
-    private int leftBtnTextColor,centerTitleColor,RightBtnTextColor;
+    private int leftBtnTextSize,centerTitleSize,rightBtnTextSize;
+    private int leftBtnTextColor,centerTitleColor,rightBtnTextColor;
     private int isLeftBtn,isCenterTitle,isRightBtn;
-    private String leftBtnText,centerTitleText,RightBtnText;
+    private String leftBtnText,centerTitleText,rightBtnText;
     private Paint mPaint;
 
     public TitleBarView(Context context, AttributeSet attrs) {
@@ -95,6 +95,24 @@ public class TitleBarView extends RelativeLayout {
             rightBtn.setBackground(rightBtnBg);
 
             rightParams = new RelativeLayout.LayoutParams(60, ViewGroup.LayoutParams.MATCH_PARENT);
+            rightParams.addRule(ALIGN_PARENT_RIGHT,TRUE);
+            rightParams.setMargins(0,23,32,23);
+            addView(rightBtn, rightParams);
+        }else if(isRightBtn==2){
+            rightBtnText = arr.getString(R.styleable.TitleBarView_rightBtnText);
+            rightBtnTextSize = arr.getInt(R.styleable.TitleBarView_rightBtnTextSize,14);
+            rightBtnTextColor = arr.getColor(R.styleable.TitleBarView_rightBtnTextColor,getResources().getColor(R.color.white));
+            rightBtn = new Button(getContext());
+            rightBtn.setText(rightBtnText);
+            rightBtn.setTextColor(rightBtnTextColor);
+            rightBtn.setTextSize(rightBtnTextSize);
+            rightBtn.setBackgroundColor(getResources().getColor(R.color.nothing));
+            rightBtn.setPadding(0,0,0,0);
+            mPaint.setTextSize(rightBtnTextSize);
+            Rect textBound = new Rect();
+            mPaint.getTextBounds(leftBtnText, 0, rightBtnText.length(), textBound);
+            Log.e("abc",rightBtnText.length()+"   "+textBound.right+"   "+textBound.right+"   "+DpSpUtil.dp2px(getContext(),textBound.right-textBound.right));
+            rightParams = new RelativeLayout.LayoutParams(DpSpUtil.sp2px(getContext(),rightBtnTextSize*rightBtnText.length()), ViewGroup.LayoutParams.MATCH_PARENT);
             rightParams.addRule(ALIGN_PARENT_RIGHT,TRUE);
             rightParams.setMargins(0,23,32,23);
             addView(rightBtn, rightParams);
