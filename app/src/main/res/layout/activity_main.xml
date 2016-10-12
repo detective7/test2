@@ -15,7 +15,7 @@
         app:centerTitleText="标题"
         app:isRightBtn="2"
         app:rightBtnText="hello"
-        app:rightBtnTextSize="16sp"
+        app:rightBtnTextSize="14sp"
         app:rightBtnTextColor="#3322AA"
         android:background="@color/colorPrimary"
         android:id="@+id/title"/>
