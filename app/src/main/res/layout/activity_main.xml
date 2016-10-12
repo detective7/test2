@@ -81,4 +81,14 @@
         android:text="功能三：Fragment+Viewpager+Fragment嵌套"
         android:layout_alignParentEnd="true" />
 
+    <Button
+        android:id="@+id/graph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/frag_viewp"
+        android:text="功能四：函数画图"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

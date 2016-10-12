@@ -23,7 +23,7 @@ import com.example.ys.testsms.interfaces.TitleBarListener;
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener,TitleBarListener {
 
     String APPKEY = "11bc365b9eff2";
     String APPSECRETE = "658f26cd66e813667521d0a915d95b56";
@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private EditText inputPhoneEt;
     private EditText inputCodeEt;
     private Button requestCodeBtn;
-    private Button commitBtn,fileFinder,fragBtn;
+    private Button commitBtn,fileFinder,fragBtn,graphBtn;
     private static int REQUESTCODE=11;
     private TitleBarView titleBar;
     int i = 30;
@@ -46,13 +46,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         //透明导航栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         fileFinder = (Button)this.findViewById(R.id.fileFinder);
-        fileFinder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,FileFinderActivity.class);
-                MainActivity.this.startActivityForResult(intent,REQUESTCODE);
-            }
-        });
+        fileFinder.setOnClickListener(this);
 
         init();
     }
@@ -81,17 +75,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         fragBtn =(Button)findViewById(R.id.frag_viewp);
         fragBtn.setOnClickListener(this);
         titleBar = (TitleBarView)findViewById(R.id.title);
-        titleBar.setOnTitleBarClickListener(new TitleBarListener() {
-            @Override
-            public void leftClick() {
-                Toast.makeText(MainActivity.this, "左", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void rightClick() {
-                Toast.makeText(MainActivity.this, "右", Toast.LENGTH_SHORT).show();
-            }
-        });
+        titleBar.setOnTitleBarClickListener(this);
+        graphBtn = (Button) findViewById(R.id.graph);
+        graphBtn.setOnClickListener(this);
 
         // 启动短信验证sdk
         SMSSDK.initSDK(this, APPKEY, APPSECRETE);
@@ -150,8 +136,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 //createProgressBar();
                 break;
 
+            case R.id.fileFinder:
+                Intent intent = new Intent(MainActivity.this,FileFinderActivity.class);
+                MainActivity.this.startActivityForResult(intent,REQUESTCODE);
+                break;
+
             case R.id.frag_viewp:
                 startActivity(new Intent(MainActivity.this,Frag_viewpActivity.class));
+                break;
+
+            case R.id.graph:
+                startActivity(new Intent(MainActivity.this,GraphActivity.class));
+                break;
         }
     }
 
@@ -254,4 +250,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onDestroy();
     }
 
+    @Override
+    public void leftClick() {
+        Toast.makeText(MainActivity.this, "左", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void rightClick() {
+        Toast.makeText(MainActivity.this, "右", Toast.LENGTH_SHORT).show();
+    }
 }

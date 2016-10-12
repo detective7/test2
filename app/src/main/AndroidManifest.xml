@@ -36,7 +36,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".FileFinderActivity" />
-        <activity android:name=".Frag_viewpActivity"/>
+        <activity android:name=".Frag_viewpActivity" />
+        <activity android:name=".GraphActivity"></activity>
     </application>
 
 </manifest>
